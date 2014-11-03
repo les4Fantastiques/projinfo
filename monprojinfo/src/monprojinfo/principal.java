@@ -1,19 +1,17 @@
 package monprojinfo;
 
-import javax.swing.JFrame;
-
 import twitter4j.TwitterException;
 
 public class principal {
 
 	public static void main(String[] args) throws TwitterException {
 		// TODO Auto-generated method stub
-		recevoirtrends montrend= new recevoirtrends();
-		String[] monactu=montrend.prendretrends();
-		for(String i :monactu){
+		/*recevoirtrends montrend= new recevoirtrends();
+		String[] monactu=montrend.prendretrends();*/
+		/*for(String i :monactu){
 			System.out.println(i);
 		}
-		System.out.println(monactu.length);
+		System.out.println(monactu.length);*/
 		//smallWindows test=new smallWindows();
 		//windows test1 = new windows();
 		/*mediumWindows fen=new mediumWindows();

@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import twitter4j.TwitterException;
 import monprojinfo.smallWindows;
  
 public class mediumWindows extends JFrame implements ActionListener{
@@ -69,6 +70,8 @@ public class mediumWindows extends JFrame implements ActionListener{
     }*/
     @Override
     public void actionPerformed(ActionEvent a) {
+    	@SuppressWarnings("unused")
+		int aretourner=-1;
     	if(a.getSource() == this.a1){
     		smallWindows windows1 = new smallWindows();	
     		windows1.pack();
@@ -107,16 +110,24 @@ public class mediumWindows extends JFrame implements ActionListener{
     	if(a.getSource() == this.a8){
     		smallWindows windows8 = new smallWindows();
     		windows8.pack();
-			windows8.setVisible(true);	
+			windows8.setVisible(true);
+			this.dispose();
     	}
     	if(a.getSource() == this.actualise){
     		//ajouter une action d'actualise
-    		
+    		this.dispose();
+    		try {
+				windows test=new windows();
+			} catch (TwitterException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     		
     	}
     	if(a.getSource() == this.ferme){
     		this.dispose();
-    	}   	
+    	}   
+    	//return aretourner;
        
     }
 }

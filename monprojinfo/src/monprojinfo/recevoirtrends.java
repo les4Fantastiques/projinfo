@@ -36,7 +36,7 @@ public class recevoirtrends {
     	TwitterFactory tf = new TwitterFactory(cb.build());
     	Twitter twitter = tf.getInstance();
     	
-    	Trends montrend =  twitter.getPlaceTrends(1);//609125);//le paramètre correspond au lieu (1 pour mondial)
+    	Trends montrend =  twitter.getPlaceTrends(609125);//(1);//le paramètre correspond au lieu (1 pour mondial)
     	Trend malistedetrend[] =montrend.getTrends();//transforme en un tableau de 10trends
     	String[] mastringlist= new String[10];/*le tableau de chaines de caractères*/
     	
