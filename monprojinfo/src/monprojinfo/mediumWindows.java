@@ -68,7 +68,6 @@ public class mediumWindows extends JFrame implements ActionListener{
         fen.setVisible(true);
         fen.setLocationRelativeTo(null);  
     }*/
-    @Override
     public void actionPerformed(ActionEvent a) {
     	@SuppressWarnings("unused")
 		int aretourner=-1;

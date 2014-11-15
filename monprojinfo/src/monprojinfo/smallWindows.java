@@ -55,7 +55,6 @@ public class smallWindows extends JFrame implements ActionListener{
         test.setLocationRelativeTo(null);
         
     }
-    @Override
     public void actionPerformed(ActionEvent a){
 		if (a.getSource() == this.sauvegarde){
 			//ajouter une action	

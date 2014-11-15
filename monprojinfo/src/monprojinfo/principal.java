@@ -22,6 +22,8 @@ public class principal {
         fen.setVisible(true);
         fen.setLocationRelativeTo(null); */ 
 		windows test=new windows();
+		BingSearchService bingSearchService = new BingSearchService();
+		bingSearchService.search("adrien moleins");
 		
 	}
 
