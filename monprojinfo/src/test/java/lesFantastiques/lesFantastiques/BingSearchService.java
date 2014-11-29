@@ -3,9 +3,15 @@ package lesFantastiques.lesFantastiques;
 import net.billylieurance.azuresearch.AzureSearchNewsQuery;
 import net.billylieurance.azuresearch.AzureSearchNewsResult;
 import net.billylieurance.azuresearch.AzureSearchResultSet;
+/**
+ * récupérer les résultats de cherche sur Bing
+ * 
+ * @author YISHUO & Adrien
+ */
+
 
 public class BingSearchService {
-	private static final String Api_Key = "zJtPaLzjzlMGm1tlJNl8zZ+pFlRL1BLORWgSptXMbP8";
+	private static final String Api_Key = "XXMMDkj1V6lkgwusChQmhxFAeIKVrY+k9d1TQcP3L/U";
 	static AzureSearchNewsQuery aq = new AzureSearchNewsQuery();
 	static AzureSearchResultSet<AzureSearchNewsResult> newsBing;
 
@@ -14,7 +20,7 @@ public class BingSearchService {
 		aq.setMarket("fr-fr");
 	}
 
-	public static void rechercheNewsBing(String search) {
+	public void rechercheNewsBing(String search) {
 		//aq.setAppid(Api_Key);
 		aq.setQuery(search);
 		aq.doQuery();
@@ -28,10 +34,9 @@ public class BingSearchService {
 	public void setNewsBing(AzureSearchResultSet<AzureSearchNewsResult> newsBing) {
 		this.newsBing = newsBing;
 	}
-	public static void main(String[] args){
+/*	public static void main(String[] args){
 		BingSearchService aaa = new BingSearchService();
 		aaa.rechercheNewsBing("nabila");
-		int i=0;
 		for (AzureSearchNewsResult newBing : BingSearchService.getNewsBing()) {
 //			tweet tweet_bing= new tweet();
 			String str = "";
@@ -46,10 +51,7 @@ public class BingSearchService {
 			str += " - Url : " + newBing.getUrl();
 //    	    area.setText(str);
 			System.out.println(str);
-			i++;
-			
 		}
-		System.out.println(i);
-	}
+	}*/
 }
 

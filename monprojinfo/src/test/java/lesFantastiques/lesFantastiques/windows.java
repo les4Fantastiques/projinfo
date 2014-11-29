@@ -25,6 +25,10 @@ public class windows implements ActionListener, ListSelectionListener {
 	JTextArea area = new JTextArea(660,470);
     Container panel = fenetre.getContentPane();
     JButton actualise = new JButton("ACTUALISER");
+    JPanel card3 = new JPanel();
+    JScrollPane card3Scroll = new JScrollPane(card3);
+    
+
     
 	String[] mylist= new String[10];
 //	String[] resultats = new String[100];
@@ -41,6 +45,7 @@ public class windows implements ActionListener, ListSelectionListener {
 	    }
 	    return mylist;
 	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	JList sujet = new JList(mylist);
 
 	
@@ -48,6 +53,7 @@ public class windows implements ActionListener, ListSelectionListener {
     	if(a.getSource() == this.actualise){
     		fenetre.dispose();
     		try {
+				@SuppressWarnings("unused")
 				testInternet test1 = new testInternet();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -56,45 +62,54 @@ public class windows implements ActionListener, ListSelectionListener {
     	}	  
     }
 	
-	
-
 	MouseListener mouseListener = new MouseAdapter() {
         public void mouseClicked(MouseEvent mouseEvent) {
-            JList list = (JList) mouseEvent.getSource();
-            Object[] selectedvalues = list.getSelectedValues();
+			JList list = (JList) mouseEvent.getSource();
+			Object[] selectedvalues = list.getSelectedValues();
             for (int i = 0; i < selectedvalues.length; i++) {
             	titre = selectedvalues[i].toString();
-            	text.setText("les resultats sur Bing pour la titre : "+titre);
+            	text.setText("Voici les BingNews pour "+titre);
             	text.setHorizontalAlignment(JTextField.CENTER);
             	text.setBackground(Color.CYAN);
             	}      	
         }
     };
- 
-    public void valueChanged(ListSelectionEvent e) {
-/*    	if (e.getValueIsAdjusting()==true) {
-    		Object sousou = sujet.getSelectedValue();
-     		BingSearchService.rechercheNewsBing(sousou);
-			for (AzureSearchNewsResult newBing : BingSearchService.getNewsBing()) {
-//				tweet tweet_bing= new tweet();
+ 	public void valueChanged(ListSelectionEvent e) {
+ 		card3Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+ 	    card3Scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    	if(e.getValueIsAdjusting()==true){
+    		if (e.getSource() == sujet && sujet.getSelectedValue() != null){
+    	    BingSearchService aaa = new BingSearchService();
+		    aaa.rechercheNewsBing(sujet.getSelectedValue().toString());
+//          card3.setLayout(new GridLayout(num,1));	
+		    card3.removeAll();//supprimer touts les components sur le precedent card3
+		    card3.setSize(660, 470);
+		    int rows = 0;
+		    for (AzureSearchNewsResult newBing : BingSearchService.getNewsBing()) {	
+		    	rows += 1;
+		    }//obtenir la nombre des resultats sur Bing
+		    card3.setLayout(new GridLayout(rows, 1));
+		    for (AzureSearchNewsResult newBing : BingSearchService.getNewsBing()) {	
+		    	etiquette d1 = new etiquette(); 
 				String str = "";
-				str += "Titre : " + newBing.getTitle();
-//				tweet_bing.settextarea_titre(newBing.getTitle());
-				str += " - Source : " + newBing.getSource();
-//			    tweet_bing.setlabel_source(newBing.getSource());
-				str += " - Date : " + newBing.getDate();
-//				tweet_bing.setlabel_temps(newBing.getDate());
-				str += " - Description : " + newBing.getDescription();
-//				tweet_bing.settextarea_description(newBing.getDescription());
-				str += " - Url : " + newBing.getUrl();
-//	    	    area.setText(str);
-				System.out.println(str);
+		    	str += "- Titre : " + newBing.getTitle()+"\n";
+			    str += " - Source : " + newBing.getSource()+"\n";
+			    str += " - Date : " + newBing.getDate()+"\n";
+			    str += " - Description : " + newBing.getDescription()+"\n";
+			    str += "\n";
+			    System.out.println(str);
+			    JPanel resultatChaque = new JPanel();
+			    resultatChaque.setLayout(new FlowLayout(FlowLayout.LEFT));
+			    Component resultatlist = d1.renvoyerpanel();
+			    resultatChaque.add(resultatlist);
+			    card3.add(resultatChaque);
+			    d1.contenu.append(str);
+			    }    
+		    System.out.println("取结果结束");
+		    }
+    		}
+       	}
 
-			}
-		}*/
-		}
-
-    @SuppressWarnings("rawtypes")
 	public windows(){
     	try {
 			this.mylist=this.trends(mylist);
@@ -105,7 +120,7 @@ public class windows implements ActionListener, ListSelectionListener {
     	
             
     	    sujet.setBorder(BorderFactory.createTitledBorder(" Les trends du moment : "));
-    	
+    
 //          ajouter du fond de la fenetre
     	    fenetre.setContentPane(panel); 
     	    ImageIcon background = new ImageIcon("background.jpg");
@@ -126,16 +141,20 @@ public class windows implements ActionListener, ListSelectionListener {
     	    JPanel card2 = new JPanel();
     	    card2.setLayout(new FlowLayout());
     	    card2.add(text);
+/*    	    
+//    	    JPanel card3 = new JPanel();
+//    	    card3.setPreferredSize(null);
+    	    JScrollPane card3Scroll = new JScrollPane(card3);
+    	    card3Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+     	    card3Scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    	    for(int i=0; i<10; i++){
+    	    	etiquette d1 = new etiquette();
+//    	    	d1.renvoyerpanel().setPreferredSize(new Dimension(600,100));
+    	    	card3Scroll.getViewport().add(d1.renvoyerpanel());    	    	
+//    	    	card3.add(d1.renvoyerpanel());
+
+    	    }*/
     	    
-    	    JPanel card3 = new JPanel();
-    	    card3.setLayout(new GridLayout(10,1));
-//    	    JScrollPane card3scroll=new JScrollPane(card3);
-//    	    card3scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            area.setLineWrap(true);
-//    	    for(int i=0;i<10;i++){
-//    	    	etiquette w = new etiquette();
-//    	    	card3scroll.add(w.w);
-//    	    }
     	    
     	    
 		    panel.setLayout(null);
@@ -147,8 +166,10 @@ public class windows implements ActionListener, ListSelectionListener {
 		    card1.setBounds(100, 390, 110, 35);
             panel.add(card2);
             card2.setBounds(300, 20, 660, 30);
-		    panel.add(card3);
-		    card3.setBounds(300, 60, 660, 470);
+		    panel.add(card3Scroll);
+		    card3Scroll.setBounds(300, 60, 660, 470);
+//		    panel.add(card3);
+//		    card3.setBounds(300, 60, 660, 470);
 		
      	    sujet.addListSelectionListener(this);
 	        sujet.addMouseListener(mouseListener);
