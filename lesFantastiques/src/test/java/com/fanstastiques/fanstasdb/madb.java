@@ -10,7 +10,7 @@ import lesFantastiques.lesFantastiques.recevoirtrends;
 import lesFantastiques.lesFantastiques.testInternet;
 
 public class madb {
-	 Path curpath = Paths.get("4fantas.db");
+	 Path curpath = Paths.get("");
 	 private String DBPath = "Chemin aux base de donnée SQLite";
 	 private Connection connection = null;
 	 private Statement statement = null;
