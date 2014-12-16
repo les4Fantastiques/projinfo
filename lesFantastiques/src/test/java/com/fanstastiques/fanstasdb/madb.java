@@ -77,33 +77,32 @@ public class madb {
 	            statement.executeUpdate(query);
 	        } catch (SQLException e) {
 	            // TODO Auto-generated catch block
-	            e.printStackTrace();
+	            //e.printStackTrace();
 	        }
 		 
 	 }
 	 
-	 public void afficheruser(){
+	 public ResultSet afficheruser(){
 		 String query ="SELECT * FROM Utilisateur";
-		
-	       
-	 
+		 ResultSet resultSet = this.query(query);
+		  
+		 return resultSet;
 	 }
 	 
 	 public static void main(String[] args){
 	    	
 		        madb connexion = new madb("4fantas.db");
 		        connexion.connect();
-		        Utilisateur user = new Utilisateur("titi","toto");
-		        //connexion.adduser(user);	        
-		        //connexion.afficheruser();
-		        ResultSet resultSet = connexion.query("SELECT * FROM Utilisateur");
+		        Utilisateur user = new Utilisateur("gros robert2","toto2");
+		        connexion.adduser(user);	        
+		        ResultSet resultSet=connexion.afficheruser();
 		        try {
 		            while (resultSet.next()) {
 		                System.out.println("user : "+resultSet.getString("LOGIN"));
 		            }
 		        } catch (SQLException e) {
 		            e.printStackTrace();
-		        }
+		        } 
 		        connexion.close();
 	    }
 	 
